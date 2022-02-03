@@ -1,9 +1,12 @@
 @echo off
-title Python Extension Installer - Unregistered Beta 2
+title Python Extension Installer 1.1 - %Name%
 color 0a
 
 :Check
+title Python Extension Installer 1.1 - Unregistered
+set /p Color=<savecolor.cmd
 set /p Name=<savefile.cmd
+color %Color%
 cls
 echo Are you %Name%? (If nothing appeared after "Are you", enter N or n)
 set /p "Y/N=[Y/N]:"
@@ -13,14 +16,24 @@ if %Y/N%==N goto registry
 if %Y/N%==n goto registry
 
 :registry
+cls
+title Python Extension Installer 1.1 - Unregistered
 echo Please enter your name:
 set /p "Name=>>"
 echo Alright %Name%!
 (
     echo %Name%
 )>savefile.cmd
+ping localhost-n 1 >nul
+echo Do you want to change the color of text?
+set /p "Y/N=[Y/N]:"
+if %Y/N%==Y goto colorChange
+if %Y/N%==y goto colorChange
+if %Y/N%==N goto installMenu
+if %Y/N%==n goto installMenu
 
 :installMenu
+title Python Extension Installer 1.1 - %Name%
 cls
 echo #################################################################
 echo ##### %Name%, welcome to the Python Extension Installer v1.0 ####
@@ -108,5 +121,25 @@ echo If none of these apply, you can enter 6 to install a custom package.
 echo You'll need to Enter the name of a package that you want to install.
 echo That's all for now.
 echo Press any key to go back to the main menu.
+pause>nul
+goto installMenu
+
+:colorChange
+cls
+echo %Name%, please enter the codename of the color that you want to use: 
+echo 0 = black	8 = gray
+echo 1 = navy	9 = blue
+echo 2 = green	A = lime
+echo 3 = teal	B = aqua
+echo 4 = maroon	C = red
+echo 5 = purple	D = fuchsia
+echo 6 = olive	E = yellow
+echo 7 = silver	F = white
+set /p "Color=>>"
+color %Color%
+(
+    echo %Color%
+)>savecolor.cmd
+echo press any key to go back to the main menu.
 pause>nul
 goto installMenu
